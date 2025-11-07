@@ -1,0 +1,80 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build
+dist
+*.tsbuildinfo
+
+# Temp files
+tmp
+*.tmp
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Security: Exclude sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.aws/
+.azure/
+*.credentials
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Documentation
+*.md
+!README.md
+docs
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+
+# Testing
+coverage
+.nyc_output
+*.test.ts
+*.spec.ts
+__tests__
+src/__tests__
+test-data
+
+# Development tools
+.husky
+.editorconfig
+.prettierrc*
+.eslintrc*
+jest.config.js
+nodemon.json
+
+# Misc
+.DS_Store
+Thumbs.db
+*.swp
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Scripts (not needed in production)
+scripts

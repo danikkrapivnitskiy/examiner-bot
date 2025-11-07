@@ -1,0 +1,12 @@
+node_modules
+dist
+tmp
+logs
+*.log
+.env
+.env.*
+coverage
+*.min.js
+*.map
+package-lock.json
+

@@ -1,0 +1,247 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./src/scripts/tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "rules": {
+    // TypeScript specific rules
+    // SECURITY NOTE (Issue #27): Critical security rules are set to "warn" for gradual migration
+    // These should be changed to "error" after fixing all violations
+    "@typescript-eslint/no-explicit-any": "warn", // Changed from "off" - prevents type safety bypass
+    "@typescript-eslint/no-unsafe-assignment": "warn", // Changed from "off" - prevents unsafe assignments
+    "@typescript-eslint/no-unsafe-call": "warn", // Changed from "off" - prevents unsafe function calls
+    "@typescript-eslint/no-unsafe-member-access": "warn", // Changed from "off" - prevents unsafe property access
+    "@typescript-eslint/no-unsafe-argument": "warn", // Changed from "off" - prevents unsafe arguments
+    "@typescript-eslint/no-unsafe-return": "warn", // Changed from "off" - prevents unsafe returns
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-floating-promises": "warn", // Changed from "off" - prevents unhandled promises
+    "@typescript-eslint/no-misused-promises": "warn", // Changed from "off" - prevents promises in wrong places
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/no-redundant-type-constituents": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unsafe-enum-comparison": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/prefer-optional-chain": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow",
+        "filter": {
+          "regex": "^(DIContainer|IORedis|ANALYZE_CHUNK_SYSTEM_PROMPT|QUESTION_BANK_SYSTEM_PROMPT|EVALUATE_ANSWER_SYSTEM_PROMPT|USER_FACING_START_EXAM_ERROR|USER_FACING_DOCUMENT_UPLOAD_ERROR|USER_FACING_PROCESSING_ANSWER_ERROR|GROK_OPENAI_COMPAT_BASE_URL|MAX_OUTBOUND_MESSAGE_CHARS|REDIS_KEY_PREFIX|TARGET_CHUNK_CHAR_LENGTH|MAX_DOCUMENT_ESTIMATED_TOKENS|MAX_DOCUMENT_BYTES|FREE_DAILY_UPLOAD_LIMIT|PRO_DAILY_UPLOAD_LIMIT|LEVEL_ORDER|DAYS_TO_KEEP_CHARACTERS|HOURS_PER_DAY|MINUTES_PER_HOUR|SECONDS_PER_MINUTE|MS_PER_SECOND|CHARACTER_MAX_AGE_MS|MAX_SIZE|MAX_SAFE_TOKENS|MAX_RESPONSE_LENGTH|MAX_PAYMENT_AGE|MINIMUM_AMOUNT_CENTS|MAX_TTS_LENGTH|MIN_RESPONSE_LENGTH|MAX_VIDEO_SIZE_MB|OPENAI_CONFIG|LLM_MODEL_PRESETS|DEFAULT_RULES_FILE|REDIS_TTL|TIME_UNITS|MIN_TTL|MAX_TTL|TON_PAYMENT_REDIS_PREFIXES|TON_PAYMENT_TTL|USER_PROFILE_SCHEMA_VERSION|USER_SETTINGS_SCHEMA_VERSION|USER_STATS_SCHEMA_VERSION|request_id|MESSAGE_TYPE|JOB_STATUS|JOB_ID_PREFIX|FILE_PREFIX|UNKNOWN_VALUE|BACKOFF_TYPE|ErrorHandler|GET_CONVERSATION_LENGTH_SCRIPT|GET_PROFILE_WITH_UPDATE_SCRIPT|UPDATE_PROFILE_SCRIPT|UPDATE_SETTINGS_SCRIPT|INCREMENT_MESSAGE_COUNT_SCRIPT|UPDATE_STATS_SCRIPT|DECREMENT_REMAINING_MESSAGES_SCRIPT|INCREMENT_REMAINING_MESSAGES_SCRIPT|ADD_REMAINING_MESSAGES_SCRIPT|ADMIN_CALLBACKS|ADMIN_IDS_FILE|ADMIN_IDS_REDIS_KEY|ADMIN_IDS_TTL|CIS_LANGUAGES|CRITICAL_ERROR_PATTERNS|LOG_LEVEL_MAP|GENDER_TO_VOICE_MAP|DEFAULT_VOICE|VOICE_TO_LOCALE_MAP|LOCALE_TO_VOICE_MAP|RATE_LIMIT_ERROR_CODE|BACKOFF_MULTIPLIER|JITTER_FACTOR|ONE_SECOND_MS|JITTER_RANGE|MAX_CLEANUP_INTERVAL_MS|SESSION_MESSAGE_PRIORITY|STREAMING_CHARACTERS|STREAMING_STATS_SCHEMA_VERSION|UUID_REGEX|StreamingAvatarClass|MESSAGE_NOT_MODIFIED_ERROR_CODE|ENABLE_DIAGNOSTIC_SESSION_LIST|ADD_MESSAGE_SCRIPT|GET_AND_MARK_READ_SCRIPT|CLOSURE_WARNING_THRESHOLD_MS|ATOMIC_INCREMENT_CREDITS_DEDUCTED_SCRIPT|MAX_SESSION_DURATION|GET_STREAMING_CONVERSATION_LENGTH_SCRIPT|UPDATE_STREAMING_STATS_SCRIPT|ATOMIC_SAVE_HISTORY_AND_STATS_SCRIPT|INCREMENT_STREAMING_MESSAGE_COUNT_SCRIPT|DECREMENT_CREDITS_SCRIPT|ADD_REMAINING_CREDITS_SCRIPT|CharacterMenuCallbackHandler|ChatSettingsCallbackHandler|StreamSettingsCallbackHandler|CharacterLanguageSelectionCallbackHandler|CharacterLanguageMenuCallbackHandler|StatisticsCommandHandler|StreamHistoryCallbackHandler|StreamClearHistoryCallbackHandler|StreamClearHistoryMenuCallbackHandler|StreamMenuCommandHandler|AdminAddCreditsCallbackHandler|InlineKeyboard|StreamingLLMRequestSchema|SESSION_CONSTANTS|MAX_BUTTON_LENGTH|CACHE_TTL|StatisticsSyncService|UserStateService|_userStateService|MAX_ITERATIONS|BATCH_SIZE|ClearMenuCallbackHandler|DEV_TEST_JOBS)$",
+          "match": true
+        }
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "enumMember",
+        "format": ["UPPER_CASE"]
+      },
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "prefix": ["I"],
+        "filter": {
+          "regex": "^(LocaleStrings|.*Error|.*Config|.*Options|.*Result|.*Response|.*Request|HeyGenVoice|PreflightCheck|LoadTestMetrics|PerformanceAssessment|ExamState|BotContext|ReadyFileDuplicate|LlmChatMessage|PutObjectParams|PersistedTelegramUser|RunExaminerAiPipelineInput)$",
+          "match": false
+        }
+      },
+      {
+        "selector": "import",
+        "format": ["camelCase", "PascalCase"],
+        "filter": {
+          "regex": "^(IORedis|Redis|OpenAI)$",
+          "match": true
+        }
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": null,
+        "filter": {
+          "regex": "^(gpt-|grok-|Content-Type|X-Api-Key)",
+          "match": true
+        }
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": ["camelCase", "snake_case", "PascalCase", "UPPER_CASE"],
+        "filter": {
+          "regex": "^(callback_data|parse_mode|reply_markup|inline_keyboard|show_alert|total_amount|invoice_payload|telegram_payment_charge_id|provider_payment_charge_id|NX|EX|N|r|p|error_type|image_url|audio_url|video_format|avatar_image|audio_data|max_tokens|start_parameter|provider_token|error_code|error_message|MATCH|COUNT|XTR|TON|EUR|USD|CONVERSATION|MOOD|CONVERSATION_SUMMARY|USER_STATS|USER_STATS_WITH_PAID_MESSAGES|USER_PROFILE|USER_SETTINGS|USER_STATE|AVATAR_URL_CACHE|ONE_YEAR|SECOND|MINUTE|HOUR|DAY|WEEK|TWO_WEEKS|MONTH|PROCESSED|PENDING|content_type|file_name|file_size|video_url|audio_conversion|Authorization|Text|LanguageCode|OutputFormat|VoiceId|Engine|TEXT|VOICE|VIDEO_NOTE|WAITING|ACTIVE|COMPLETED|FAILED|EXPONENTIAL|Bucket|Key|Body|Metadata|ContentType|ACL|Prefix|MaxKeys|ContinuationToken|first_name|chat_id|USER_MANAGEMENT|COMMUNICATION|STATISTICS|BOT_CONTROL|BACK|CLOSE|USER_INFO|ADD_MESSAGES|SET_BALANCE|BLOCK_USER|UNBLOCK_USER|BLOCKED_USERS|SEND_MESSAGE|CLEAR_HISTORY|BOT_STATS|BOT_STOP|BOT_START|BOT_RESTART|BOT_STATUS|CZK|MAX_SESSION_DURATION|DEFAULT_SESSION_EXPIRATION_MS|ABANDONED_THRESHOLD_MS|USER_AGENT_SUBSTRING_LENGTH|PENDING_MESSAGES_LIMIT|SESSION_HISTORY_LIMIT|IDEMPOTENT_ERROR_PATTERNS|ADD_CREDITS|STREAM_LIST|STREAM_CLOSE|AvatarError|UserAvatarError|StreamingRecordingError|StreamingConnectionError|SessionCreationError|SessionCleanupError|SessionAbandonedError|ConcurrentSessionLimitError|InsufficientCreditsError|StreamingNetworkError|StreamingAPIError|RedisConnectionError|SessionLimitCheckError|SessionLockError|ERROR|WARN|INFO|REV|session_started|error_count|detected_language|character_language|message_language|session_id|task_type|ws_url|client_token|access_token|sdp_answer|ice_servers|avatar_name|voice_id|knowledge_base|llm_webhook_url|end_conversation|user-agent|x-telegram-init-data|last_name|language_code|is_premium|auth_date|X-Api-Key|content-type|NODE_ENV|LOG_LEVEL|USE_TEST_ENVIRONMENT|TELEGRAM_BOT_TOKEN|TELEGRAM_TEST_BOT_TOKEN|PORT|TEST_PORT|WEBHOOK_URL|TEST_WEBHOOK_URL|TELEGRAM_WEBHOOK_SECRET|DATABASE_URL|REDIS_URL|DO_SPACES_ENDPOINT|DO_SPACES_REGION|DO_SPACES_KEY|DO_SPACES_SECRET|DO_SPACES_BUCKET|LLM_PROVIDER|OPENAI_API_KEY|OPENAI_MODEL|STT_MODEL|GROK_API_KEY|GROK_MODEL|ADMIN_IDS|response_format|weak_topics|strong_topics|key_facts|ideal_answer)$",
+          "match": true
+        }
+      },
+      {
+        "selector": "typeProperty",
+        "format": ["camelCase", "snake_case", "UPPER_CASE"],
+        "filter": {
+          "regex": "^(callback_data|parse_mode|reply_markup|inline_keyboard|show_alert|total_amount|invoice_payload|telegram_payment_charge_id|provider_payment_charge_id|first_name|error_code|XTR|TON|EUR|USD|image_url|audio_url|content_type|file_name|file_size|video_url|avatar_image|audio_data|video_format|session_id|task_type|ws_url|client_token|access_token|sdp_answer|ice_servers|avatar_name|voice_id|knowledge_base|llm_webhook_url|last_name|language_code|is_premium|auth_date|remaining_quota|display_name|supported_languages|preview_audio)$",
+          "match": true
+        }
+      },
+      {
+        "selector": "classProperty",
+        "modifiers": ["readonly", "static"],
+        "format": ["UPPER_CASE", "camelCase"]
+      },
+      {
+        "selector": "classProperty",
+        "modifiers": ["readonly"],
+        "format": ["UPPER_CASE", "camelCase"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "format": ["UPPER_CASE", "camelCase", "PascalCase"],
+        "filter": {
+          "regex": "^(WorkerHealthServer)$",
+          "match": true
+        }
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "filter": {
+          "regex": "^(Amy|Brian|Tatyana|Maxim)$",
+          "match": true
+        },
+        "format": ["PascalCase"]
+      }
+    ],
+
+    // Import rules
+    "import/order": [
+      "off",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-unresolved": "error",
+    "import/no-cycle": "off",
+    "import/no-unused-modules": "warn",
+    "import/no-named-as-default-member": "off",
+
+    // General rules
+    "no-console": "warn", // Changed from "off" - prevents console.log in production (Issue #27)
+    "no-debugger": "error",
+    "no-alert": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-template": "warn",
+    "no-throw-literal": "error",
+    "no-return-await": "error",
+    "require-await": "off",
+    "eqeqeq": ["error", "always"],
+    "curly": ["warn", "all"],
+    "brace-style": "off",
+    "no-magic-numbers": [
+      "off",
+      {
+        "ignore": [
+          0, 1, -1, 2, 3, 5, 7, 8, 10, 16, 24, 36, 50, 80, 100, 200, 300, 500, 512, 1024, 1000, 3600, 60000, 300000,
+          0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 2.5, 3.5
+        ],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignoreClassFieldInitialValues": true,
+        "enforceConst": true,
+        "detectObjects": false
+      }
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 200,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "complexity": "off",
+    "max-depth": "off",
+    "max-params": "off",
+
+    // Prettier
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": ["./tsconfig.json", "./src/scripts/tsconfig.json"]
+      }
+    }
+  },
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "ignorePatterns": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/**",
+    "dist/**",
+    "node_modules/**",
+    "coverage/**",
+    "**/*.md"
+  ],
+  "overrides": [
+    {
+      "files": ["src/scripts/**/*.ts", "src/utils/logger.ts", "src/config/**/*.ts"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["src/app.ts"],
+      "rules": {
+        "@typescript-eslint/no-misused-promises": "off"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+// Examiner MVP — PostgreSQL (Supabase-compatible)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL") // temporarily disabled for migrate via Transaction Pooler (IPv6)
+}
+
+enum ExamStatus {
+  PROCESSING
+  READY
+  COMPLETED
+  ERROR
+}
+
+model User {
+  id           BigInt   @id
+  username     String?
+  firstName    String?  @map("first_name")
+  subscriptionEndDate DateTime? @map("subscription_end_date")
+  referralCode String   @unique @default(uuid()) @map("referral_code")
+  referredBy   BigInt?  @map("referred_by")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  exams        Exam[]
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Exam {
+  id           String     @id @default(uuid())
+  userId       BigInt     @map("user_id")
+  status       ExamStatus @default(PROCESSING)
+  knowledgeMap Json?      @map("knowledge_map")
+  score        Int?
+  maxScore     Int?       @map("max_score")
+  feedback     String?
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("exams")
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  userId    BigInt   @map("user_id")
+  amount    Int
+  currency  String   @default("czk")
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("transactions")
+}
